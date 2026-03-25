@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Thang Phan — Senior Full-Stack Developer";
+export const alt = "Eric Phan — Senior Full-Stack Developer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -70,7 +70,7 @@ export default async function Image() {
               fontWeight: 800,
             }}
           >
-            T
+            E
           </div>
         </div>
 
@@ -83,7 +83,7 @@ export default async function Image() {
             letterSpacing: "-0.02em",
           }}
         >
-          Thang Phan
+          Eric Phan
         </div>
 
         {/* Title */}

@@ -121,24 +121,6 @@ export const projects: Project[] = [
       "Multi-role: Reception → Doctor → Pharmacy → Cashier",
     ],
   },
-  {
-    id: "smtp247",
-    title: "SMTP247",
-    subtitle: "Email Infrastructure Platform",
-    description:
-      "An e-commerce platform for email infrastructure services — SMTP servers and RDP access — with crypto payment integration (Binance, NOWPayments), order tracking, and bulk email tools.",
-    url: "#",
-    tags: ["Next.js", "Crypto Payments", "Binance API", "Supabase"],
-    category: "infrastructure",
-    highlights: [
-      "SMTP server & RDP product marketplace",
-      "Crypto payment: Binance Pay + NOWPayments",
-      "Automated order provisioning & tracking",
-      "Bulk email sending tools & analytics",
-      "Admin panel with product management",
-      "Cart & checkout flow with multiple payment options",
-    ],
-  },
 ];
 
 export const techStack = {

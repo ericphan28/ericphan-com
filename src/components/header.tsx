@@ -58,10 +58,10 @@ export function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-purple-500 flex items-center justify-center text-white font-bold text-sm">
-            T
+            E
           </div>
           <span className="font-bold text-lg tracking-tight">
-            thang<span className="text-accent">phan</span>
+            eric<span className="text-accent">phan</span>
           </span>
         </Link>
 

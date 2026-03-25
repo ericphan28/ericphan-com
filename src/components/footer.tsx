@@ -9,10 +9,10 @@ export function Footer() {
           {/* Brand */}
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-accent to-purple-500 flex items-center justify-center text-white font-bold text-xs">
-              T
-            </div>
+              E
+          </div>
             <span className="font-bold text-sm">
-              thang<span className="text-accent">phan</span>
+              eric<span className="text-accent">phan</span>
             </span>
           </div>
 
@@ -56,7 +56,7 @@ export function Footer() {
 
         <div className="mt-8 pt-6 border-t border-border text-center text-xs text-muted">
           <p className="flex items-center justify-center gap-1">
-            © {new Date().getFullYear()} Thang Phan. Built with
+            © {new Date().getFullYear()} Eric Phan. Built with
             <Heart className="w-3 h-3 text-red-500 fill-red-500" />
             using Next.js + Tailwind + Vercel
           </p>

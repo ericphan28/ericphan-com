@@ -34,7 +34,7 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           Hi, I&apos;m{" "}
-          <span className="gradient-text">Thang Phan</span>
+          <span className="gradient-text">Eric Phan</span>
         </motion.h1>
 
         {/* Title */}
