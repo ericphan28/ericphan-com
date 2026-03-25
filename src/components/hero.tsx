@@ -64,7 +64,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          Senior Full-Stack Developer
+          Full-Stack Developer & Digital Transformation Consultant
         </motion.p>
 
         {/* Description */}
@@ -74,10 +74,11 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          I build <strong className="text-foreground">production SaaS platforms</strong>,{" "}
-          <strong className="text-foreground">government portals</strong>, and{" "}
-          <strong className="text-foreground">AI-powered tools</strong> with{" "}
-          Next.js, TypeScript, Supabase &amp; Vercel.
+          Former founder &amp; project manager turned developer. I build{" "}
+          <strong className="text-foreground">production SaaS platforms</strong>,{" "}
+          <strong className="text-foreground">government digital services</strong>, and{" "}
+          <strong className="text-foreground">AI-powered tools</strong> — leading digital
+          transformation projects from strategy to deployment.
         </motion.p>
 
         {/* Stats row */}

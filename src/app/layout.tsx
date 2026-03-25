@@ -16,9 +16,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ericphan.com"),
-  title: "Eric Phan — Senior Full-Stack Developer",
+  title: "Eric Phan — Full-Stack Developer & Digital Transformation Consultant",
   description:
-    "I build production SaaS platforms, government portals, and AI-powered tools with Next.js, TypeScript, Supabase, and Vercel. View my live projects and case studies.",
+    "Former founder & PM turned developer. I build production SaaS platforms, government digital services, and AI-powered tools with Next.js, TypeScript, Supabase, and Vercel.",
   keywords: [
     "full-stack developer",
     "Next.js developer",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Eric Phan" }],
   openGraph: {
-    title: "Eric Phan — Senior Full-Stack Developer",
+    title: "Eric Phan — Full-Stack Developer & Digital Transformation Consultant",
     description:
       "Production SaaS platforms, government portals, and AI tools. Next.js + TypeScript + Supabase + Vercel.",
     url: "https://ericphan.com",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Eric Phan — Senior Full-Stack Developer",
+    title: "Eric Phan — Full-Stack Developer & Digital Transformation Consultant",
     description:
       "I build production SaaS, gov portals & AI tools with Next.js + Supabase.",
   },

@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Eric Phan — Senior Full-Stack Developer";
+export const alt = "Eric Phan — Full-Stack Developer & Digital Transformation Consultant";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -94,7 +94,7 @@ export default async function Image() {
             marginTop: 8,
           }}
         >
-          Senior Full-Stack Developer
+          Full-Stack Developer & Digital Transformation Consultant
         </div>
 
         {/* Tech tags */}
