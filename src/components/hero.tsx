@@ -24,7 +24,7 @@ export function Hero() {
         >
           <div className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full overflow-hidden border-4 border-accent/30 shadow-xl shadow-accent/10 glow">
             <Image
-              src="/images/avatar.jpg"
+              src="/images/avatar-ericphan.jpg"
               alt="Eric Phan"
               fill
               className="object-cover object-top"
