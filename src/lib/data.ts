@@ -105,7 +105,7 @@ export const projects: Project[] = [
     subtitle: "Healthcare Dashboard Platform",
     description:
       "A comprehensive medical clinic management platform covering patient registration, doctor queues, examination workflow, pharmacy dispensing, insurance processing, and revenue reporting.",
-    url: "#",
+    url: "https://phongkham.giakiemso.com",
     tags: ["Next.js", "Supabase", "TypeScript", "Tailwind CSS"],
     category: "healthcare",
     stats: [
