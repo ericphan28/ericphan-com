@@ -2,6 +2,7 @@
 
 import { ArrowDown, ExternalLink, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export function Hero() {
   return (
@@ -14,11 +15,30 @@ export function Hero() {
       <div className="absolute bottom-20 -right-32 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-float [animation-delay:3s]" />
 
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
+        {/* Avatar */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="flex justify-center"
+        >
+          <div className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full overflow-hidden border-4 border-accent/30 shadow-xl shadow-accent/10 glow">
+            <Image
+              src="/images/avatar.jpg"
+              alt="Eric Phan"
+              fill
+              className="object-cover object-top"
+              priority
+            />
+          </div>
+        </motion.div>
+
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mt-6"
         >
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent-bg border border-accent/20 text-accent text-sm font-medium">
             <Sparkles className="w-3.5 h-3.5" />
@@ -28,10 +48,10 @@ export function Hero() {
 
         {/* Name */}
         <motion.h1
-          className="mt-8 text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight"
+          className="mt-6 text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
           Hi, I&apos;m{" "}
           <span className="gradient-text">Eric Phan</span>
@@ -42,7 +62,7 @@ export function Hero() {
           className="mt-4 text-xl sm:text-2xl text-muted font-medium"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
         >
           Senior Full-Stack Developer
         </motion.p>
@@ -52,7 +72,7 @@ export function Hero() {
           className="mt-6 text-base sm:text-lg text-muted max-w-2xl mx-auto leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
         >
           I build <strong className="text-foreground">production SaaS platforms</strong>,{" "}
           <strong className="text-foreground">government portals</strong>, and{" "}
@@ -65,7 +85,7 @@ export function Hero() {
           className="mt-10 flex flex-wrap items-center justify-center gap-8 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
         >
           {[
             { value: "630+", label: "API Routes" },
@@ -85,7 +105,7 @@ export function Hero() {
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
         >
           <a
             href="#projects"
