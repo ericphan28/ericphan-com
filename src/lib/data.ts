@@ -150,6 +150,192 @@ export const techStack = {
   ],
 };
 
+// Blog / Case Study posts
+export interface BlogPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  readTime: string;
+  category: "case-study" | "tutorial" | "insight";
+  tags: string[];
+  coverGradient: string; // tailwind gradient classes
+  content: string; // markdown-ish content for the detail page
+}
+
+export const blogPosts: BlogPost[] = [
+  {
+    slug: "building-multi-tenant-saas-from-scratch",
+    title: "Building a Multi-Tenant SaaS Platform from Scratch",
+    excerpt:
+      "How I architected ChoGiaKiem.vn — a marketplace serving multiple vendors with 630+ API routes, auto subdomain routing, POS, inventory, and e-invoicing — using Next.js, Supabase, and Vercel.",
+    date: "2026-03-15",
+    readTime: "8 min read",
+    category: "case-study",
+    tags: ["Next.js", "Supabase", "Multi-Tenant", "SaaS", "TypeScript"],
+    coverGradient: "from-blue-600 to-cyan-500",
+    content: `## The Challenge
+
+When I set out to build ChoGiaKiem.vn, the goal was ambitious: create a **multi-tenant marketplace platform** where each vendor gets their own storefront, subdomain, POS system, and business tools — all from a single codebase.
+
+The platform needed to handle:
+- **Multi-vendor isolation** — each vendor's data completely separated
+- **Auto subdomain routing** — vendor1.chogiakiem.vn, vendor2.chogiakiem.vn
+- **Full POS system** with barcode scanning and receipt printing
+- **Real-time inventory** tracking across multiple warehouses
+- **E-invoicing** integration with the Vietnamese tax authority (VNPT)
+- **HR dashboard** — payroll, attendance, leave management
+
+## Architecture Decisions
+
+### Why Next.js + Supabase?
+
+I chose **Next.js 15 App Router** for its hybrid rendering model — most dashboard pages are client-rendered for interactivity, while public storefronts use SSR for SEO. **Supabase (PostgreSQL)** was the natural choice for its Row-Level Security (RLS), real-time subscriptions, and generous free tier during development.
+
+### Multi-Tenant Strategy: Shared DB, RLS Isolation
+
+Instead of separate databases per tenant, I used a **shared database with RLS policies**. Every table includes a \`vendor_id\` column, and Supabase RLS ensures vendors can only see their own data.
+
+\`\`\`sql
+-- Example RLS policy
+CREATE POLICY "Vendors see own products" ON products
+  FOR ALL USING (vendor_id = auth.jwt() ->> 'vendor_id');
+\`\`\`
+
+This approach keeps infrastructure costs low while maintaining strict data isolation.
+
+### Subdomain Routing
+
+Next.js middleware handles subdomain detection, resolving \`vendorname.chogiakiem.vn\` to the correct vendor context before any page renders.
+
+## Key Technical Achievements
+
+| Metric | Value |
+|--------|-------|
+| API Routes | 630+ |
+| React Components | 397 |
+| Database Tables | 50+ |
+| App Modules | 15+ |
+
+### The POS System
+
+The POS module was the most complex — it needed to:
+1. Scan barcodes via camera or USB scanner
+2. Calculate tax, discounts, and loyalty points in real-time
+3. Print thermal receipts (58mm/80mm)
+4. Work offline with local state sync
+
+I built a **service worker** that caches critical POS data locally, so cashiers can continue selling even during network interruptions.
+
+### E-Invoicing Integration
+
+Vietnam's tax authority requires electronic invoicing (hóa đơn điện tử). I built a queue-based system that:
+1. Generates invoices in the required XML format
+2. Signs with digital certificates
+3. Submits to VNPT's API
+4. Stores the tax authority's response code
+
+## Results
+
+- **Platform serves multiple active vendors** with complete business operations
+- **Zero data leaks** between tenants — verified with penetration testing
+- **Sub-second page loads** on dashboard — Lighthouse performance score 90+
+- **30% reduction** in vendor onboarding time compared to manual setup
+
+## Lessons Learned
+
+1. **Start with RLS from day one** — retrofitting security policies is painful
+2. **Invest in TypeScript types early** — with 630+ API routes, type safety saved me countless hours
+3. **Build admin tools first** — a good admin panel accelerates everything else
+4. **Test with real vendors** — real-world usage revealed edge cases no unit test would catch
+
+The platform continues to grow, and the architecture has proven scalable. Each new vendor can be onboarded in under 5 minutes, with full POS, inventory, and accounting ready to go.`,
+  },
+  {
+    slug: "digitizing-government-services-commune-portal",
+    title: "Digitizing Government Services: Building a Commune Portal for 20K+ Residents",
+    excerpt:
+      "How I built XaGiaKiem.gov.vn — a government digital portal with AI chatbot, online public services, and digital transformation dashboard — transforming how 20,000+ residents interact with local government.",
+    date: "2026-02-20",
+    readTime: "6 min read",
+    category: "case-study",
+    tags: ["Government", "AI Chatbot", "Digital Transformation", "Next.js", "Supabase"],
+    coverGradient: "from-emerald-600 to-teal-500",
+    content: `## The Challenge
+
+Gia Kiem commune serves **20,000+ residents** but was still running most public services through paper forms and in-person visits. The local government wanted to:
+
+- Create an **official digital portal** for all commune information
+- Enable **online public service requests** (thủ tục hành chính)
+- Build an **AI chatbot** to answer citizen questions 24/7
+- Provide a **digital transformation dashboard** for leadership oversight
+- Support the **2026 election** information portal
+
+## My Approach
+
+As both the **project manager and lead developer**, I had to balance government requirements (formal processes, security, accessibility) with modern UX expectations.
+
+### Information Architecture
+
+The portal needed to serve multiple audiences:
+- **Residents** — looking for service procedures, news, contact info
+- **Businesses** — seeking investment information, industrial zone details
+- **Government staff** — managing content, processing requests
+- **Leadership** — monitoring digital transformation progress
+
+I designed **34+ public sections** organized by user intent, with a clear navigation hierarchy.
+
+### The AI Chatbot
+
+The standout feature is the **AI-powered chatbot** that helps residents navigate administrative procedures. Instead of reading through pages of regulations, residents can ask natural language questions like:
+
+> "Tôi cần làm giấy khai sinh cho con, cần giấy tờ gì?"
+> (What documents do I need for a birth certificate?)
+
+The chatbot is trained on the commune's actual procedural database, so answers are always accurate and up-to-date.
+
+### Technical Stack
+
+- **Frontend**: Next.js App Router with SSR for SEO (government sites must be Google-indexed)
+- **Backend**: Supabase with strict RLS — government data has extra security requirements
+- **AI**: LLM integration with context retrieval from procedural documents
+- **Testing**: Cypress E2E tests for critical user flows
+- **Hosting**: Vercel with custom domain (xagiakiem.gov.vn)
+
+## Key Features Built
+
+### 1. Online Public Services (TTHC)
+Residents can submit service requests online instead of visiting the commune office. The system tracks status and notifies via SMS.
+
+### 2. Digital Transformation Dashboard
+Real-time metrics showing the commune's digitization progress — how many services are online, response times, citizen satisfaction scores.
+
+### 3. OCOP Product Showcase
+Promoting local products through the national "One Commune One Product" program, helping local businesses reach wider markets.
+
+### 4. Election 2026 Portal
+Dedicated section for election information, candidate profiles, and voting procedures.
+
+## Results
+
+| Metric | Before | After |
+|--------|--------|-------|
+| Services available online | 0 | 34+ |
+| Average service request time | 2-3 days | Same day |
+| Citizen information queries | In-person only | 24/7 via chatbot |
+| Admin modules | 0 | 12 |
+
+## Lessons Learned
+
+1. **Government projects need extensive stakeholder alignment** — I held weekly review sessions with commune leadership
+2. **Accessibility is non-negotiable** — the portal serves elderly residents with varying tech literacy
+3. **Content management must be simple** — government staff aren't developers, so the admin CMS needs to be intuitive
+4. **Security audits are mandatory** — government portals are high-value targets; I implemented CSP headers, rate limiting, and regular dependency audits
+
+This project represents what digital transformation looks like at the grassroots level — bringing modern technology to where it makes the most direct impact on people's daily lives.`,
+  },
+];
+
 export const services = [
   {
     title: "SaaS Development",
