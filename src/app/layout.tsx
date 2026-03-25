@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ericphan.com"),
-  title: "Eric Phan — Full-Stack Developer & Digital Transformation Consultant",
+  title: "Eric Phan — Developer & DX Consultant",
   description:
     "Former founder & PM turned developer. I build production SaaS platforms, government digital services, and AI-powered tools with Next.js, TypeScript, Supabase, and Vercel.",
   keywords: [
