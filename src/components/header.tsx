@@ -4,14 +4,8 @@ import { useState, useEffect, useCallback, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { Menu, X, Moon, Sun, Mail } from "lucide-react";
 import { GitHubIcon } from "@/components/icons";
-
-const navLinks = [
-  { href: "#projects", label: "Projects" },
-  { href: "#tech", label: "Tech Stack" },
-  { href: "#services", label: "Services" },
-  { href: "#blog", label: "Blog" },
-  { href: "#contact", label: "Contact" },
-];
+import { LocaleCurrencySwitcher } from "@/components/locale-currency-switcher";
+import { useTranslation } from "@/lib/i18n/context";
 
 function useIsDark() {
   const subscribe = useCallback((cb: () => void) => {
@@ -34,6 +28,15 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const dark = useIsDark();
   const [scrolled, setScrolled] = useState(false);
+  const { t, locale } = useTranslation();
+
+  const navLinks = [
+    { href: "#projects", label: t("nav.projects") },
+    { href: "#tech", label: t("nav.tech") },
+    { href: "#services", label: t("nav.services") },
+    { href: "#blog", label: t("nav.blog") },
+    { href: "#contact", label: t("nav.contact") },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -57,7 +60,7 @@ export function Header() {
     >
       <nav className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
+        <Link href={`/${locale}`} className="flex items-center gap-2 group">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-purple-500 flex items-center justify-center text-white font-bold text-sm">
             E
           </div>
@@ -80,7 +83,8 @@ export function Header() {
         </div>
 
         {/* Actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          <LocaleCurrencySwitcher />
           <a
             href="https://github.com/ericphan28"
             target="_blank"
@@ -102,7 +106,7 @@ export function Header() {
             className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-white text-sm font-medium hover:bg-accent-dark transition-colors"
           >
             <Mail className="w-3.5 h-3.5" />
-            Hire Me
+            {t("nav.hireMe")}
           </a>
 
           {/* Mobile toggle */}
@@ -136,7 +140,7 @@ export function Header() {
               className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-accent text-white text-sm font-medium"
             >
               <Mail className="w-3.5 h-3.5" />
-              Hire Me
+              {t("nav.hireMe")}
             </a>
           </div>
         </div>

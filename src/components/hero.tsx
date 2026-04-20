@@ -3,8 +3,10 @@
 import { ArrowDown, ExternalLink, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useTranslation } from "@/lib/i18n/context";
 
 export function Hero() {
+  const { t } = useTranslation();
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background grid */}
@@ -42,7 +44,7 @@ export function Hero() {
         >
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent-bg border border-accent/20 text-accent text-sm font-medium">
             <Sparkles className="w-3.5 h-3.5" />
-            Available for freelance work
+            {t("hero.badge")}
           </span>
         </motion.div>
 
@@ -53,7 +55,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Hi, I&apos;m{" "}
+          {t("hero.greeting")}{" "}
           <span className="gradient-text">Eric Phan</span>
         </motion.h1>
 
@@ -73,13 +75,8 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          Former founder &amp; project manager turned developer. I build{" "}
-          <strong className="text-foreground">production SaaS platforms</strong>,{" "}
-          <strong className="text-foreground">government digital services</strong>, and{" "}
-          <strong className="text-foreground">AI-powered tools</strong> — leading digital
-          transformation projects from strategy to deployment.
-        </motion.p>
+          dangerouslySetInnerHTML={{ __html: t("hero.description") }}
+        />
 
         {/* Stats row */}
         <motion.div
@@ -89,10 +86,10 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.5 }}
         >
           {[
-            { value: "630+", label: "API Routes" },
-            { value: "6+", label: "Live Projects" },
-            { value: "20K+", label: "Users Served" },
-            { value: "50+", label: "DB Tables" },
+            { value: "630+", label: t("hero.stats.apiRoutes") },
+            { value: "6+", label: t("hero.stats.liveProjects") },
+            { value: "20K+", label: t("hero.stats.usersServed") },
+            { value: "50+", label: t("hero.stats.dbTables") },
           ].map((stat) => (
             <div key={stat.label}>
               <div className="text-2xl sm:text-3xl font-bold gradient-text">{stat.value}</div>
@@ -112,7 +109,7 @@ export function Hero() {
             href="#projects"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-white font-medium hover:bg-accent-dark transition-all shadow-lg shadow-accent/25 hover:shadow-accent/40"
           >
-            View My Work
+            {t("hero.cta")}
             <ArrowDown className="w-4 h-4" />
           </a>
           <a
@@ -121,7 +118,7 @@ export function Hero() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-medium hover:bg-card transition-colors"
           >
-            Live Demo
+            {t("hero.liveDemo")}
             <ExternalLink className="w-4 h-4" />
           </a>
         </motion.div>

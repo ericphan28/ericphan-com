@@ -3,6 +3,7 @@
 import { ExternalLink, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { projects } from "@/lib/data";
+import { useTranslation } from "@/lib/i18n/context";
 
 const categoryColors: Record<string, string> = {
   saas: "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20",
@@ -13,16 +14,8 @@ const categoryColors: Record<string, string> = {
   infrastructure: "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/20",
 };
 
-const categoryLabels: Record<string, string> = {
-  saas: "SaaS Platform",
-  government: "Government",
-  ai: "AI / Automation",
-  business: "Business Tools",
-  healthcare: "Healthcare",
-  infrastructure: "Infrastructure",
-};
-
 export function Projects() {
+  const { t } = useTranslation();
   return (
     <section id="projects" className="py-24 px-6">
       <div className="mx-auto max-w-6xl">
@@ -35,14 +28,13 @@ export function Projects() {
           transition={{ duration: 0.5 }}
         >
           <span className="text-accent font-mono text-sm font-medium">
-            {"// Featured Projects"}
+            {t("projects.sectionTag")}
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl font-bold">
-            What I&apos;ve Built
+            {t("projects.heading")}
           </h2>
           <p className="mt-4 text-muted max-w-xl mx-auto">
-            Production applications serving real users — from multi-tenant SaaS
-            to government digital services.
+            {t("projects.subtitle")}
           </p>
         </motion.div>
 
@@ -66,13 +58,13 @@ export function Projects() {
                         categoryColors[project.category]
                       }`}
                     >
-                      {categoryLabels[project.category]}
+                      {t(`projects.categories.${project.category}`)}
                     </span>
                     <h3 className="mt-3 text-xl sm:text-2xl font-bold group-hover:text-accent transition-colors">
                       {project.title}
                     </h3>
                     <p className="mt-1 text-sm text-muted font-medium">
-                      {project.subtitle}
+                      {t(`projects.items.${project.id}.subtitle`) !== `projects.items.${project.id}.subtitle` ? t(`projects.items.${project.id}.subtitle`) : project.subtitle}
                     </p>
                   </div>
                   {project.url !== "#" && (
@@ -82,7 +74,7 @@ export function Projects() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent-bg text-accent text-sm font-medium hover:bg-accent hover:text-white transition-colors shrink-0"
                     >
-                      Visit Site
+                      {t("projects.visitSite")}
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   )}
@@ -90,40 +82,46 @@ export function Projects() {
 
                 {/* Description */}
                 <p className="mt-4 text-muted leading-relaxed">
-                  {project.description}
+                  {t(`projects.items.${project.id}.description`) !== `projects.items.${project.id}.description` ? t(`projects.items.${project.id}.description`) : project.description}
                 </p>
 
                 {/* Stats */}
                 {project.stats && (
                   <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
-                    {project.stats.map((stat) => (
-                      <div
-                        key={stat.label}
-                        className="text-center py-3 px-2 rounded-lg bg-background border border-border"
-                      >
-                        <div className="text-lg font-bold text-accent">
-                          {stat.value}
+                    {project.stats.map((stat) => {
+                      const translated = t(`projects.items.${project.id}.stats.${stat.key}`);
+                      return (
+                        <div
+                          key={stat.label}
+                          className="text-center py-3 px-2 rounded-lg bg-background border border-border"
+                        >
+                          <div className="text-lg font-bold text-accent">
+                            {stat.value}
+                          </div>
+                          <div className="text-xs text-muted mt-0.5">
+                            {translated !== `projects.items.${project.id}.stats.${stat.key}` ? translated : stat.label}
+                          </div>
                         </div>
-                        <div className="text-xs text-muted mt-0.5">
-                          {stat.label}
-                        </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 )}
 
                 {/* Highlights */}
                 <div className="mt-6">
                   <div className="grid sm:grid-cols-2 gap-2">
-                    {project.highlights.map((h) => (
-                      <div
-                        key={h}
-                        className="flex items-start gap-2 text-sm text-muted"
-                      >
-                        <ChevronRight className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                        <span>{h}</span>
-                      </div>
-                    ))}
+                    {project.highlights.map((h, hi) => {
+                      const translated = t(`projects.items.${project.id}.highlights.${hi}`);
+                      return (
+                        <div
+                          key={h}
+                          className="flex items-start gap-2 text-sm text-muted"
+                        >
+                          <ChevronRight className="w-4 h-4 text-accent shrink-0 mt-0.5" />
+                          <span>{translated !== `projects.items.${project.id}.highlights.${hi}` ? translated : h}</span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
 

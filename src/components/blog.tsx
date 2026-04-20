@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Clock, Tag } from "lucide-react";
 import Link from "next/link";
 import { blogPosts } from "@/lib/data";
+import { useTranslation } from "@/lib/i18n/context";
 
 const categoryStyles: Record<string, string> = {
   "case-study":
@@ -14,13 +15,8 @@ const categoryStyles: Record<string, string> = {
     "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20",
 };
 
-const categoryLabels: Record<string, string> = {
-  "case-study": "Case Study",
-  tutorial: "Tutorial",
-  insight: "Insight",
-};
-
 export function Blog() {
+  const { t, locale } = useTranslation();
   return (
     <section id="blog" className="py-24 px-6 bg-card">
       <div className="mx-auto max-w-6xl">
@@ -33,14 +29,13 @@ export function Blog() {
           transition={{ duration: 0.5 }}
         >
           <span className="text-accent font-mono text-sm font-medium">
-            {"// Writing & Case Studies"}
+            {t("blog.sectionTag")}
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl font-bold">
-            How I Build Things
+            {t("blog.heading")}
           </h2>
           <p className="mt-4 text-muted max-w-xl mx-auto">
-            Deep dives into real projects — architecture decisions, technical
-            challenges, and lessons learned.
+            {t("blog.subtitle")}
           </p>
         </motion.div>
 
@@ -55,7 +50,7 @@ export function Blog() {
               transition={{ duration: 0.5, delay: i * 0.15 }}
             >
               <Link
-                href={`/blog/${post.slug}`}
+                href={`/${locale}/blog/${post.slug}`}
                 className="group block rounded-2xl border border-border bg-background hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 overflow-hidden"
               >
                 {/* Cover gradient */}
@@ -67,7 +62,7 @@ export function Blog() {
                     <span
                       className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium border bg-white/90 dark:bg-black/60 ${categoryStyles[post.category]}`}
                     >
-                      {categoryLabels[post.category]}
+                      {t(`blog.categories.${post.category}`)}
                     </span>
                   </div>
                   {/* Decorative code pattern */}
@@ -83,18 +78,18 @@ export function Blog() {
                 {/* Content */}
                 <div className="p-6">
                   <h3 className="text-lg sm:text-xl font-bold leading-tight group-hover:text-accent transition-colors">
-                    {post.title}
+                    {t(`blog.items.${post.slug}.title`) !== `blog.items.${post.slug}.title` ? t(`blog.items.${post.slug}.title`) : post.title}
                   </h3>
 
                   <p className="mt-3 text-sm text-muted leading-relaxed line-clamp-3">
-                    {post.excerpt}
+                    {t(`blog.items.${post.slug}.excerpt`) !== `blog.items.${post.slug}.excerpt` ? t(`blog.items.${post.slug}.excerpt`) : post.excerpt}
                   </p>
 
                   {/* Meta */}
                   <div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-muted">
                     <span className="inline-flex items-center gap-1">
                       <Calendar className="w-3.5 h-3.5" />
-                      {new Date(post.date).toLocaleDateString("en-US", {
+                      {new Date(post.date).toLocaleDateString(locale === "vi" ? "vi-VN" : "en-US", {
                         month: "short",
                         day: "numeric",
                         year: "numeric",
@@ -102,7 +97,7 @@ export function Blog() {
                     </span>
                     <span className="inline-flex items-center gap-1">
                       <Clock className="w-3.5 h-3.5" />
-                      {post.readTime}
+                      {post.readTime.replace("min read", t("blog.readTime"))}
                     </span>
                   </div>
 
@@ -121,7 +116,7 @@ export function Blog() {
 
                   {/* Read more */}
                   <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent group-hover:gap-3 transition-all">
-                    Read Case Study
+                    {t("blog.readMore")}
                     <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>

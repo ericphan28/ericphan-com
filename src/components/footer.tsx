@@ -1,7 +1,11 @@
+"use client";
+
 import { Mail, Heart } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons";
+import { useTranslation } from "@/lib/i18n/context";
 
 export function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className="border-t border-border bg-card">
       <div className="mx-auto max-w-6xl px-6 py-12">
@@ -18,10 +22,10 @@ export function Footer() {
 
           {/* Links */}
           <div className="flex items-center gap-6 text-sm text-muted">
-            <a href="#projects" className="hover:text-foreground transition-colors">Projects</a>
-            <a href="#tech" className="hover:text-foreground transition-colors">Tech Stack</a>
-            <a href="#services" className="hover:text-foreground transition-colors">Services</a>
-            <a href="#contact" className="hover:text-foreground transition-colors">Contact</a>
+            <a href="#projects" className="hover:text-foreground transition-colors">{t("nav.projects")}</a>
+            <a href="#tech" className="hover:text-foreground transition-colors">{t("nav.tech")}</a>
+            <a href="#services" className="hover:text-foreground transition-colors">{t("nav.services")}</a>
+            <a href="#contact" className="hover:text-foreground transition-colors">{t("nav.contact")}</a>
           </div>
 
           {/* Social */}
@@ -56,9 +60,9 @@ export function Footer() {
 
         <div className="mt-8 pt-6 border-t border-border text-center text-xs text-muted">
           <p className="flex items-center justify-center gap-1">
-            © {new Date().getFullYear()} Eric Phan. Built with
+            © {new Date().getFullYear()} Eric Phan. {t("footer.builtWith")}
             <Heart className="w-3 h-3 text-red-500 fill-red-500" />
-            using Next.js + Tailwind + Vercel
+            {t("footer.using")}
           </p>
         </div>
       </div>

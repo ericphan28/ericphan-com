@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { techStack } from "@/lib/data";
+import { useTranslation } from "@/lib/i18n/context";
 
 const sectionIcons: Record<string, string> = {
   frontend: "🎨",
@@ -10,14 +11,8 @@ const sectionIcons: Record<string, string> = {
   tools: "🔧",
 };
 
-const sectionLabels: Record<string, string> = {
-  frontend: "Frontend",
-  backend: "Backend & Database",
-  devops: "DevOps & Hosting",
-  tools: "Tools & Integrations",
-};
-
 export function TechStack() {
+  const { t } = useTranslation();
   return (
     <section id="tech" className="py-24 px-6 bg-card">
       <div className="mx-auto max-w-6xl">
@@ -29,14 +24,13 @@ export function TechStack() {
           transition={{ duration: 0.5 }}
         >
           <span className="text-accent font-mono text-sm font-medium">
-            {"// Tech Stack"}
+            {t("tech.sectionTag")}
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl font-bold">
-            Technologies I Use
+            {t("tech.heading")}
           </h2>
           <p className="mt-4 text-muted max-w-xl mx-auto">
-            A modern, production-tested stack focused on performance, type safety,
-            and developer experience.
+            {t("tech.subtitle")}
           </p>
         </motion.div>
 
@@ -54,7 +48,7 @@ export function TechStack() {
                 <div className="flex items-center gap-2 mb-5">
                   <span className="text-xl">{sectionIcons[section]}</span>
                   <h3 className="font-semibold text-sm uppercase tracking-wider text-muted">
-                    {sectionLabels[section]}
+                    {t(`tech.sections.${section}`)}
                   </h3>
                 </div>
                 <div className="space-y-3">

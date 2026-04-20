@@ -8,8 +8,14 @@ import {
   Brain,
   Rocket,
   ShieldCheck,
+  Table,
+  Database,
+  TrendingUp,
+  TerminalSquare,
 } from "lucide-react";
 import { services } from "@/lib/data";
+import { useTranslation } from "@/lib/i18n/context";
+import { useCurrency } from "@/lib/currency/context";
 
 const iconMap: Record<string, React.ReactNode> = {
   layers: <Layers className="w-6 h-6" />,
@@ -18,9 +24,15 @@ const iconMap: Record<string, React.ReactNode> = {
   brain: <Brain className="w-6 h-6" />,
   rocket: <Rocket className="w-6 h-6" />,
   shield: <ShieldCheck className="w-6 h-6" />,
+  table: <Table className="w-6 h-6" />,
+  database: <Database className="w-6 h-6" />,
+  trending: <TrendingUp className="w-6 h-6" />,
+  terminal: <TerminalSquare className="w-6 h-6" />,
 };
 
 export function Services() {
+  const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
   return (
     <section id="services" className="py-24 px-6">
       <div className="mx-auto max-w-6xl">
@@ -32,14 +44,13 @@ export function Services() {
           transition={{ duration: 0.5 }}
         >
           <span className="text-accent font-mono text-sm font-medium">
-            {"// Services"}
+            {t("services.sectionTag")}
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl font-bold">
-            How I Can Help
+            {t("services.heading")}
           </h2>
           <p className="mt-4 text-muted max-w-xl mx-auto">
-            From greenfield builds to production optimization — I deliver
-            end-to-end solutions.
+            {t("services.subtitle")}
           </p>
         </motion.div>
 
@@ -56,10 +67,15 @@ export function Services() {
               <div className="w-12 h-12 rounded-xl bg-accent-bg flex items-center justify-center text-accent mb-4">
                 {iconMap[service.icon]}
               </div>
-              <h3 className="text-lg font-semibold">{service.title}</h3>
+              <h3 className="text-lg font-semibold">{t(`services.items.${service.key}.title`)}</h3>
               <p className="mt-2 text-sm text-muted leading-relaxed">
-                {service.description}
+                {t(`services.items.${service.key}.description`)}
               </p>
+              {service.priceUSD && (
+                <p className="mt-3 text-xs font-medium text-accent">
+                  {t("services.startingFrom")} {formatPrice(service.priceUSD)}
+                </p>
+              )}
             </motion.div>
           ))}
         </div>

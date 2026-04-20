@@ -3,8 +3,10 @@
 import { motion } from "framer-motion";
 import { Mail, MessageSquare, Clock, Send } from "lucide-react";
 import { GitHubIcon, LinkedInIcon, FreelancerIcon } from "@/components/icons";
+import { useTranslation } from "@/lib/i18n/context";
 
 export function Contact() {
+  const { t } = useTranslation();
   return (
     <section id="contact" className="py-24 px-6 bg-card">
       <div className="mx-auto max-w-4xl">
@@ -16,14 +18,13 @@ export function Contact() {
           transition={{ duration: 0.5 }}
         >
           <span className="text-accent font-mono text-sm font-medium">
-            {"// Get In Touch"}
+            {t("contact.sectionTag")}
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl font-bold">
-            Let&apos;s Build Something Great
+            {t("contact.heading")}
           </h2>
           <p className="mt-4 text-muted max-w-xl mx-auto">
-            Have a project in mind? I&apos;m available for freelance work and
-            always excited to discuss new opportunities.
+            {t("contact.subtitle")}
           </p>
         </motion.div>
 
@@ -41,7 +42,7 @@ export function Contact() {
                 <Mail className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-semibold">Email</h3>
+                <h3 className="font-semibold">{t("contact.email")}</h3>
                 <a
                   href="mailto:ericphan28@gmail.com"
                   className="text-sm text-muted hover:text-accent transition-colors"
@@ -56,7 +57,7 @@ export function Contact() {
                 <MessageSquare className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-semibold">Chat with me</h3>
+                <h3 className="font-semibold">{t("contact.chat")}</h3>
                 <div className="flex items-center gap-3 mt-1">
                   <a
                     href="https://github.com/ericphan28"
@@ -94,9 +95,9 @@ export function Contact() {
                 <Clock className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-semibold">Response Time</h3>
+                <h3 className="font-semibold">{t("contact.responseTime")}</h3>
                 <p className="text-sm text-muted">
-                  Usually within 2-4 hours (UTC+7)
+                  {t("contact.responseValue")}
                 </p>
               </div>
             </div>
@@ -114,7 +115,7 @@ export function Contact() {
           >
             <div>
               <label htmlFor="name" className="block text-sm font-medium mb-1.5">
-                Name
+                {t("contact.form.name")}
               </label>
               <input
                 id="name"
@@ -122,12 +123,12 @@ export function Contact() {
                 type="text"
                 required
                 className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors"
-                placeholder="Your name"
+                placeholder={t("contact.form.namePlaceholder")}
               />
             </div>
             <div>
               <label htmlFor="email" className="block text-sm font-medium mb-1.5">
-                Email
+                {t("contact.form.email")}
               </label>
               <input
                 id="email"
@@ -135,29 +136,29 @@ export function Contact() {
                 type="email"
                 required
                 className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors"
-                placeholder="your@email.com"
+                placeholder={t("contact.form.emailPlaceholder")}
               />
             </div>
             <div>
               <label htmlFor="project" className="block text-sm font-medium mb-1.5">
-                Project Type
+                {t("contact.form.projectType")}
               </label>
               <select
                 id="project"
                 name="project"
                 className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors"
               >
-                <option value="">Select a category</option>
-                <option value="saas">SaaS / Web Application</option>
-                <option value="website">Website / Landing Page</option>
-                <option value="ai">AI Integration / Automation</option>
-                <option value="deployment">Deployment / DevOps</option>
-                <option value="other">Other</option>
+                <option value="">{t("contact.form.selectCategory")}</option>
+                <option value="saas">{t("contact.form.optSaas")}</option>
+                <option value="website">{t("contact.form.optWebsite")}</option>
+                <option value="ai">{t("contact.form.optAi")}</option>
+                <option value="deployment">{t("contact.form.optDeployment")}</option>
+                <option value="other">{t("contact.form.optOther")}</option>
               </select>
             </div>
             <div>
               <label htmlFor="message" className="block text-sm font-medium mb-1.5">
-                Message
+                {t("contact.form.message")}
               </label>
               <textarea
                 id="message"
@@ -165,7 +166,7 @@ export function Contact() {
                 rows={4}
                 required
                 className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors resize-none"
-                placeholder="Tell me about your project..."
+                placeholder={t("contact.form.messagePlaceholder")}
               />
             </div>
             <button
@@ -173,7 +174,7 @@ export function Contact() {
               className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-accent text-white font-medium hover:bg-accent-dark transition-all shadow-lg shadow-accent/25"
             >
               <Send className="w-4 h-4" />
-              Send Message
+              {t("contact.form.send")}
             </button>
           </motion.form>
         </div>

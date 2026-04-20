@@ -1,17 +1,20 @@
 import { notFound } from "next/navigation";
 import { blogPosts } from "@/lib/data";
 import { BlogPostContent } from "./blog-post-content";
+import { supportedLocales } from "@/lib/i18n/types";
 
-// Generate static params for all blog posts
+// Generate static params for all blog posts × locales
 export function generateStaticParams() {
-  return blogPosts.map((post) => ({ slug: post.slug }));
+  return supportedLocales.flatMap((locale) =>
+    blogPosts.map((post) => ({ locale, slug: post.slug }))
+  );
 }
 
 // Generate metadata for each post
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }) {
   const { slug } = await params;
   const post = blogPosts.find((p) => p.slug === slug);
@@ -34,7 +37,7 @@ export async function generateMetadata({
 export default async function BlogPostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }) {
   const { slug } = await params;
   const post = blogPosts.find((p) => p.slug === slug);

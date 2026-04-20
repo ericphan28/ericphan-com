@@ -8,7 +8,7 @@ export interface Project {
   image?: string;
   tags: string[];
   category: "saas" | "government" | "ai" | "business" | "healthcare" | "infrastructure";
-  stats?: { label: string; value: string }[];
+  stats?: { key: string; label: string; value: string }[];
   highlights: string[];
 }
 
@@ -23,10 +23,10 @@ export const projects: Project[] = [
     tags: ["Next.js 15", "TypeScript", "Supabase", "Tailwind CSS", "Vercel"],
     category: "saas",
     stats: [
-      { label: "API Routes", value: "630+" },
-      { label: "Components", value: "397" },
-      { label: "DB Tables", value: "50+" },
-      { label: "App Modules", value: "15+" },
+      { key: "apiRoutes", label: "API Routes", value: "630+" },
+      { key: "components", label: "Components", value: "397" },
+      { key: "dbTables", label: "DB Tables", value: "50+" },
+      { key: "appModules", label: "App Modules", value: "15+" },
     ],
     highlights: [
       "Multi-vendor marketplace with auto subdomain routing",
@@ -47,9 +47,9 @@ export const projects: Project[] = [
     tags: ["Next.js", "Supabase", "Tailwind CSS", "Cypress", "AI Chatbot"],
     category: "government",
     stats: [
-      { label: "Public Sections", value: "34+" },
-      { label: "Residents Served", value: "20K+" },
-      { label: "Admin Modules", value: "12" },
+      { key: "publicSections", label: "Public Sections", value: "34+" },
+      { key: "residentsServed", label: "Residents Served", value: "20K+" },
+      { key: "adminModules", label: "Admin Modules", value: "12" },
     ],
     highlights: [
       "AI chatbot for citizen Q&A on administrative procedures",
@@ -87,8 +87,8 @@ export const projects: Project[] = [
     tags: ["Next.js", "Google Document AI", "Vision OCR", "Supabase", "VietQR"],
     category: "business",
     stats: [
-      { label: "AI Processors", value: "5+" },
-      { label: "Documentation", value: "100+ pages" },
+      { key: "aiProcessors", label: "AI Processors", value: "5+" },
+      { key: "documentation", label: "Documentation", value: "100+ pages" },
     ],
     highlights: [
       "Google Document AI for structured data extraction",
@@ -109,8 +109,8 @@ export const projects: Project[] = [
     tags: ["Next.js", "Supabase", "TypeScript", "Tailwind CSS"],
     category: "healthcare",
     stats: [
-      { label: "Dashboard Modules", value: "13" },
-      { label: "Workflow Steps", value: "6" },
+      { key: "dashboardModules", label: "Dashboard Modules", value: "13" },
+      { key: "workflowSteps", label: "Workflow Steps", value: "6" },
     ],
     highlights: [
       "Patient registration & queue management",
@@ -338,33 +338,73 @@ This project represents what digital transformation looks like at the grassroots
 
 export const services = [
   {
+    key: "saas",
     title: "SaaS Development",
     description: "Multi-tenant platforms with auth, billing, dashboards, and API design from scratch.",
     icon: "layers",
+    priceUSD: 500,
   },
   {
+    key: "fullstack",
     title: "Full-Stack Web Apps",
     description: "End-to-end development with Next.js + Supabase — from DB schema to production deploy.",
     icon: "code",
+    priceUSD: 300,
   },
   {
+    key: "government",
     title: "Government & Enterprise Portals",
     description: "Public-facing portals with admin panels, AI chatbots, and digital transformation tools.",
     icon: "building",
+    priceUSD: 800,
   },
   {
+    key: "ai",
     title: "AI Integration",
     description: "Document AI, OCR, LLM-powered tools, and automation integrated into your workflow.",
     icon: "brain",
+    priceUSD: 200,
   },
   {
+    key: "devops",
     title: "Deployment & DevOps",
     description: "Vercel, Docker, CI/CD pipelines, domain setup, SSL, and production hardening.",
     icon: "rocket",
+    priceUSD: 150,
   },
   {
+    key: "audit",
     title: "Performance & Security Audit",
     description: "Lighthouse optimization, RLS policies, rate limiting, and penetration testing.",
     icon: "shield",
+    priceUSD: 200,
+  },
+  {
+    key: "excel",
+    title: "Excel & Spreadsheet Automation",
+    description: "Complex formulas, Power Query, dashboards, data validation, and automated reporting templates.",
+    icon: "table",
+    priceUSD: 50,
+  },
+  {
+    key: "scraping",
+    title: "Data Processing & Web Scraping",
+    description: "Automated data collection, CSV/Excel cleaning, transformation, deduplication, and pipeline scripts.",
+    icon: "database",
+    priceUSD: 75,
+  },
+  {
+    key: "finance",
+    title: "Financial Modeling & Analysis",
+    description: "DCF models, 3-statement financials, ratio analysis, budgeting templates, and investment dashboards.",
+    icon: "trending",
+    priceUSD: 100,
+  },
+  {
+    key: "scripts",
+    title: "Script & Macro Development",
+    description: "VBA macros, Google Apps Script, Pine Script, Amibroker AFL, and workflow automation bots.",
+    icon: "terminal",
+    priceUSD: 50,
   },
 ];
