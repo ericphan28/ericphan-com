@@ -1,0 +1,33 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "dev:3999",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["dev:3999"],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": {
+        "owner": "next",
+        "pattern": {
+          "regexp": "^(.*)$",
+          "file": 1,
+          "location": 1,
+          "message": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*starting.*",
+          "endsPattern": ".*Ready in.*|.*Local:.*"
+        }
+      },
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    }
+  ]
+}

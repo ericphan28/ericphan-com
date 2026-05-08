@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useSyncExternalStore } from "react";
 import Link from "next/link";
-import { Menu, X, Moon, Sun, Mail } from "lucide-react";
+import { Menu, X, Moon, Sun, Mail, LayoutDashboard } from "lucide-react";
 import { GitHubIcon } from "@/components/icons";
 import { LocaleCurrencySwitcher } from "@/components/locale-currency-switcher";
 import { useTranslation } from "@/lib/i18n/context";
@@ -101,6 +101,14 @@ export function Header() {
           >
             {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
+          <Link
+            href="/dashboard"
+            className="p-2 rounded-lg text-muted hover:text-accent hover:bg-card transition-colors"
+            aria-label="Dashboard"
+            title="Dashboard"
+          >
+            <LayoutDashboard className="w-4 h-4" />
+          </Link>
           <a
             href="#contact"
             className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-white text-sm font-medium hover:bg-accent-dark transition-colors"
@@ -142,6 +150,18 @@ export function Header() {
               <Mail className="w-3.5 h-3.5" />
               {t("nav.hireMe")}
             </a>
+
+            {/* Dashboard — yêu cầu đăng nhập */}
+            <div className="pt-3 mt-1 border-t border-border">
+              <Link
+                href="/dashboard"
+                onClick={() => setOpen(false)}
+                className="inline-flex items-center gap-2 text-sm text-muted hover:text-accent transition-colors"
+              >
+                <LayoutDashboard className="w-4 h-4" />
+                Dashboard
+              </Link>
+            </div>
           </div>
         </div>
       )}

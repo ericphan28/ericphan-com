@@ -14,11 +14,12 @@ function getLocaleFromHeaders(req: NextRequest): string {
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // ── Skip static files, api, auth, dashboard ──
+  // ── Skip static files, api, auth, dashboard, unlock ──
   if (
     pathname.startsWith("/api") ||
     pathname.startsWith("/auth") ||
     pathname.startsWith("/dashboard") ||
+    pathname.startsWith("/unlock") ||
     pathname.startsWith("/_next") ||
     pathname.startsWith("/images") ||
     pathname.startsWith("/image") ||
@@ -33,9 +34,9 @@ export async function middleware(req: NextRequest) {
       if (pathname.startsWith("/api/dashboard")) {
         return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
       }
-      const loginUrl = new URL("/auth/login", req.url);
-      loginUrl.searchParams.set("next", pathname);
-      return NextResponse.redirect(loginUrl);
+      const unlockUrl = new URL("/unlock", req.url);
+      unlockUrl.searchParams.set("next", pathname);
+      return NextResponse.redirect(unlockUrl);
     }
 
     return NextResponse.next();
