@@ -13,6 +13,8 @@ import { redirect } from "next/navigation";
 import { getUser } from "@/lib/supabase-server";
 import { UnlockForm } from "./form";
 
+export const dynamic = 'force-dynamic';
+
 type SearchParams = Promise<{ next?: string }>;
 
 export const metadata = {

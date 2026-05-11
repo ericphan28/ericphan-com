@@ -1,13 +1,13 @@
 'use client';
 
 import { useEffect } from 'react';
-import dynamicImport from 'next/dynamic';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/navigation';
+import { LogOut } from 'lucide-react';
 import { createClient } from '@/lib/supabase-browser';
 import type { FileItem } from '@/lib/file-manager/types';
 
-export const dynamic = 'force-dynamic';
-
-const FileManager = dynamicImport(
+const FileManager = dynamic(
   () => import('@/lib/file-manager/index').then((mod) => ({ default: mod.FileManager })),
   {
     ssr: false,
@@ -34,8 +34,9 @@ const FileManager = dynamicImport(
   }
 );
 
-export default function FileManagerPage() {
+export function FileManagerClient() {
   const supabase = createClient();
+  const router = useRouter();
 
   useEffect(() => {
     const root = document.documentElement;
@@ -46,23 +47,40 @@ export default function FileManagerPage() {
     };
   }, []);
 
-  return (
-    <div className="sm:-mx-2">
-      {/* Header — ẨN trên mobile (tab bar đã chỉ active "Tệp"), chỉ hiện desktop */}
-      <div className="hidden sm:block px-3 sm:px-4 pt-3 sm:pt-4 pb-2">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-xl font-semibold text-white">File Manager</h1>
-            <p className="text-xs text-gray-400 mt-0.5">
-              Quản lý tài liệu, hình ảnh và file dự án
-            </p>
-          </div>
-        </div>
-      </div>
+  async function lock() {
+    await fetch('/api/file-manager/lock', { method: 'POST' });
+    router.refresh();
+  }
 
-      <div className="px-0 sm:px-4 pb-0 sm:pb-4">
-        {/* Mobile: full viewport trừ tab bar (~64px + safe area). Desktop: trừ header. */}
-        <div className="overflow-hidden rounded-none sm:rounded-xl border-0 sm:border sm:border-white/10 bg-background shadow-none sm:shadow-2xl sm:shadow-black/40 h-[calc(100dvh-64px-env(safe-area-inset-bottom))] sm:h-[calc(100vh-9rem)]">
+  return (
+    <div className="min-h-screen bg-[#0a0a1a] text-gray-100 flex flex-col">
+      {/* Header sticky — luôn dính trên cùng, không bao giờ bị FileManager đè */}
+      <header
+        style={{ zIndex: 100 }}
+        className="sticky top-0 flex-none flex items-center justify-between gap-3 px-3 sm:px-4 h-12 sm:h-14 border-b border-white/10 bg-[#0a0a1a]/95 backdrop-blur"
+      >
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="text-base sm:text-lg">📁</span>
+          <h1 className="text-sm sm:text-base font-semibold text-white truncate">
+            File Manager
+          </h1>
+          <span className="hidden md:inline text-xs text-gray-500">
+            · truy cập qua mã chia sẻ
+          </span>
+        </div>
+
+        <button
+          type="button"
+          onClick={lock}
+          className="flex-none inline-flex items-center gap-1.5 rounded-md bg-red-500 px-3 py-1.5 text-xs sm:text-sm font-medium text-white hover:bg-red-600 active:bg-red-700 transition cursor-pointer select-none"
+        >
+          <LogOut className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+          <span>Đăng xuất</span>
+        </button>
+      </header>
+
+      <div className="flex-1 px-2 sm:px-4 py-2 sm:py-4 min-h-0">
+        <div className="overflow-hidden rounded-none sm:rounded-xl border-0 sm:border sm:border-white/10 bg-background shadow-none sm:shadow-2xl sm:shadow-black/40 h-[calc(100vh-3rem-1rem)] sm:h-[calc(100vh-3.5rem-2rem)]">
           <FileManager
             supabaseClient={supabase}
             bucketName="file-manager"
@@ -93,7 +111,7 @@ export default function FileManagerPage() {
               showBreadcrumb: true,
               showToolbar: true,
               defaultView: 'grid',
-              compact: true,
+              compact: false,
             }}
             callbacks={{
               onFileSelect: (file: FileItem) => console.log('File selected:', file),
