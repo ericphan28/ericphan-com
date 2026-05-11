@@ -5,8 +5,6 @@ import dynamicImport from 'next/dynamic';
 import { createClient } from '@/lib/supabase-browser';
 import type { FileItem } from '@/lib/file-manager/types';
 
-export const dynamic = 'force-dynamic';
-
 const FileManager = dynamicImport(
   () => import('@/lib/file-manager/index').then((mod) => ({ default: mod.FileManager })),
   {

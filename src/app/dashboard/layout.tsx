@@ -3,6 +3,8 @@ import { DashboardNav } from "@/components/dashboard/dashboard-nav";
 import { DashboardDock } from "@/components/dashboard/dashboard-dock";
 import { Providers } from "@/components/providers";
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: "Dashboard — Eric Phan",
   description: "Freelancing management dashboard",
